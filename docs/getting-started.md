@@ -43,7 +43,7 @@ application history. You can open those files any time.
 | A **GitHub account** | Runs the daily search and stores your files. | Free |
 | An **Anthropic API key** | Pays for Claude's reviews. Make one at [console.anthropic.com](https://console.anthropic.com), or someone else can make one for you. | About 1 cent per job reviewed, typically a few dollars a month |
 | A **Gmail account** to send the email | Any Gmail address works, including your usual one. Other email providers work too. | Free |
-| A computer with **Python 3.10+** and **[Claude Code](https://claude.com/claude-code)** | Used only for setup and occasional tuning; the daily search runs on GitHub. | |
+| A Mac or Windows computer with **[Claude Code](https://claude.com/claude-code)** | Used only for setup and occasional tuning; the daily search runs on GitHub. Claude Code comes with a Claude Pro or Max plan. Claude helps you install anything else it needs (Python, git, GitHub's tool). | |
 | *Optional:* your **LinkedIn data export** | Your saved and applied jobs, as a starting point for your preferences. | Free |
 
 **Time:** about an hour, mostly the interview about what you're looking for. If you want to use your
@@ -54,10 +54,34 @@ LinkedIn data, request the export first (see step 4), because it can take up to 
 Setup is done with Claude Code. Claude interviews you and does the technical steps, and stops to ask
 before anything that creates, publishes or costs something.
 
-**1. Install job-radar** in a terminal:
+### Never used a terminal?
+
+You don't need to. Claude runs every command, and tells you exactly what to click whenever something
+happens in your browser or an installer.
+
+1. Install Claude Code from [claude.com/claude-code](https://claude.com/claude-code). The desktop
+   app for Mac and Windows works without a terminal. Sign in with your Claude account.
+2. Make an empty folder called `my-job-search` (in Documents, say), and open it in Claude Code.
+3. Paste this message and send it:
+
+   > I'd like to set up job-radar (https://github.com/bshapiro/job-radar) in this folder. I've never
+   > used a terminal, so please run the commands for me and walk me through anything I need to click.
+   > First check that I have Python 3.10 or newer, and help me install it from python.org if not. Then
+   > make a virtual environment in this folder, install
+   > "job-radar @ git+https://github.com/bshapiro/job-radar@v1.0.2" into it, run `job-radar init`, and
+   > follow the instructions in .claude/skills/job-radar-setup/SKILL.md.
+
+4. Claude asks for your permission before running each command. Read its one-line explanation and
+   approve.
+
+From there, Claude takes you through the steps below.
+
+### If you're comfortable with a terminal
+
+**1. Install job-radar:**
 
 ```sh
-pip install "job-radar @ git+https://github.com/bshapiro/job-radar@v1.0.1"
+pip install "job-radar @ git+https://github.com/bshapiro/job-radar@v1.0.2"
 ```
 
 **2. Make a folder** for your search and set it up:
@@ -74,8 +98,8 @@ From there, Claude walks you through the rest:
 
 - **The GitHub repository.** It creates a *private* repository for your search.
 - **Your keys and passwords.** It explains each of the four settings (the Anthropic key, the Gmail
-  address that sends the email, a Gmail *app password*, and where the email goes). You type each one
-  into a prompt in your own terminal, so Claude never sees them. The Gmail app password isn't your
+  address that sends the email, a Gmail *app password*, and where the email goes). You enter each
+  one on a page of your repository's settings on GitHub's website, so Claude never sees them. The Gmail app password isn't your
   normal password: you make one at Google Account > Security > App passwords, which needs 2-Step
   Verification turned on.
 - **What you're looking for.** Claude interviews you a few questions at a time:

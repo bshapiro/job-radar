@@ -50,7 +50,7 @@ You need Python 3.10+, a GitHub account with the [GitHub CLI](https://cli.github
 API key for the reviews, and a Gmail account (or any SMTP account) to send the email.
 
 ```sh
-pip install "job-radar @ git+https://github.com/bshapiro/job-radar@v1.0.1"
+pip install "job-radar @ git+https://github.com/bshapiro/job-radar@v1.0.2"
 mkdir my-job-search && cd my-job-search
 job-radar init
 ```

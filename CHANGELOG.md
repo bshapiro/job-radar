@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+
+- Setup for people who have never used a terminal: the setup skill installs Python, git and GitHub's
+  tool step by step, signs in to GitHub through the browser, and has secrets entered on GitHub's website.
+- The getting-started guide has a no-terminal path, with a message to paste into Claude Code.
+
 ## 1.0.1
 
 - Create `data/` when it's missing. Git doesn't keep an empty folder, so a freshly cloned profile repo

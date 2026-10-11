@@ -17,9 +17,13 @@ person can check.
 
 - **Ask, don't assume.** Preferences are personal. When a choice isn't clear from what they've told you,
   ask, and offer two to four concrete options. Never fill a preference in on their behalf.
-- **Never handle secrets.** API keys and passwords are typed by the person in their own terminal
-  (`gh secret set NAME`). Never ask them to paste one into the chat. If they paste one anyway, tell
-  them to revoke it and make a new one.
+- **Never handle secrets.** API keys and passwords are entered by the person themselves, on GitHub's
+  website (step 3). Never ask them to paste one into the chat. If they paste one anyway, tell them to
+  revoke it and make a new one.
+- **Go at their pace.** Many people doing this have never used a terminal. You run the commands, and
+  explain in a sentence what each one is for. When something has to happen in their browser or an
+  installer, give exact click-by-click steps and wait until they say it's done. Don't show them
+  command output unless it matters.
 - **Confirm outward-facing actions** before you take them: creating the GitHub repo, pushing, running
   the workflow, and anything that spends money (reviews cost about 1 cent per posting).
 - **Keep it private.** The profile repo holds their preferences, CV notes and application history, so
@@ -29,32 +33,55 @@ person can check.
 
 ## 1. Prerequisites
 
-Check each one, and help install whatever is missing:
-- Python 3.10 or newer (`python3 --version`).
-- The engine: `job-radar --version`. If it's missing, install the version that the workflow
-  pins: read the `JOB_RADAR` line in `.github/workflows/daily.yml` and run
-  `pip install "<that value>"` (a virtual environment is fine).
-- The GitHub CLI, logged in: `gh auth status`. If not, they run `! gh auth login` themselves.
+Find out their operating system (`uname -s`, or ask), then check each one and help install whatever is
+missing. Run each check yourself; for installers, walk them through it.
+- **Python 3.10 or newer** (`python3 --version`). If it's older or missing, have them download the
+  installer from python.org/downloads (the big yellow button), run it, and accept the defaults. On
+  Windows, they must tick "Add python.exe to PATH" on the first screen. On a Mac, after installing,
+  they double-click "Install Certificates.command" in the Python folder under Applications. Without
+  it, downloads from job boards fail with certificate errors.
+- **git** (`git --version`). On a Mac, running it the first time offers to install the developer
+  tools: they click Install. On Windows, use the installer from git-scm.com with the default options.
+- **The GitHub command-line tool** (`gh --version`). Use the installer from cli.github.com. On a Mac
+  with Homebrew, `brew install gh` works too.
+- **A GitHub account.** If they don't have one, they sign up at github.com (free).
+- **GitHub sign-in** (`gh auth status`). If they're not signed in, sign them in through the browser:
+  run `gh auth login --hostname github.com --git-protocol https --web`. It prints a one-time code and
+  a link. Tell them the code, and have them open the link, sign in, enter the code, and approve.
+  If that command waits for input you can't give it, have them type
+  `! gh auth login --hostname github.com --git-protocol https --web` in this session themselves, then
+  follow the same steps.
+- **The engine** (`job-radar --version`). If it's missing, install the version pinned on the
+  `JOB_RADAR` line of `.github/workflows/daily.yml`. If there's no workflow yet, install the version
+  from the engine's README. Use a virtual environment in the folder: `python3 -m venv .venv`, then
+  `.venv/bin/pip install "<that value>"` (on Windows, `.venv\Scripts\pip`). From then on, run the
+  engine as `.venv/bin/job-radar`.
 - If `profile/` doesn't exist yet, run `job-radar init` here.
 
 ## 2. The GitHub repo
 
-If the folder isn't already a git repo with a GitHub remote, offer to run
-`git init`, then `gh repo create <name> --private --source . --push`.
-Confirm the name with them first. In the repo's settings, Actions must be allowed to create
-issues. This is on by default; the workflow asks for `issues: write`.
+If the folder isn't already a git repo with a GitHub remote, suggest a name (e.g. `my-job-search`)
+and confirm it with them. Then run `git init`, and `gh repo create <name> --private --source .`.
+Push in step 8, once there's something worth saving. In the repo's settings, Actions must be
+allowed to create issues. This is on by default; the workflow asks for `issues: write`.
 
 ## 3. Accounts and secrets
 
-Four repository secrets. Explain each one, then have them run the command in their own terminal
-(the `!` prefix runs it in this session without the value appearing in the chat):
+The daily run needs four repository secrets. Prepare each value first, then they enter all four on
+GitHub's website:
 
-| Secret | What it is | Command |
+| Secret | What it is | How to get it |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Pays for the reviews (about 1 cent per posting, typically $2-5 a month). Make it at console.anthropic.com. A separate workspace with a monthly spend limit is a good idea. If someone else is paying, they create the key and give it to the person directly, not through a chat. | `! gh secret set ANTHROPIC_API_KEY` |
-| `SMTP_USER` | The Gmail address that sends the email | `! gh secret set SMTP_USER` |
-| `SMTP_PASSWORD` | A Gmail **app password** (Google Account > Security > 2-Step Verification must be on > App passwords). It is not their normal password. | `! gh secret set SMTP_PASSWORD` |
-| `EMAIL_TO` | Where the email goes (several addresses can be separated by commas) | `! gh secret set EMAIL_TO` |
+| `ANTHROPIC_API_KEY` | Pays for the reviews (about 1 cent per posting, typically $2-5 a month). | Their own: console.anthropic.com > API keys > Create key. A separate workspace with a monthly spend limit is a good idea. If someone else is paying, that person creates the key and gives it to them privately (a password manager, or in person), not by email or chat. |
+| `SMTP_USER` | The Gmail address that sends the email. | Any Gmail address they have. |
+| `SMTP_PASSWORD` | A Gmail **app password**, not their normal password. | myaccount.google.com > Security > turn on 2-Step Verification if it's off > search the page for "App passwords" > make one called job-radar. Google shows 16 letters once, so they leave that page open until it's entered. |
+| `EMAIL_TO` | Where the email goes. Several addresses can be separated by commas. | Usually the same address. |
+
+To enter them, give them the link `https://github.com/<owner>/<repo>/settings/secrets/actions`.
+For each secret: click **New repository secret**, type the name exactly as in the table, paste the
+value, and click **Add secret**. (People comfortable with a terminal can type
+`! gh secret set NAME` instead, which asks for the value.) Check with `job-radar doctor`, which lists
+the secrets by name. It never shows the values.
 
 Other email providers work too: they also set `SMTP_HOST` and `SMTP_PORT` (SSL). Without SMTP secrets
 the digest is posted as a GitHub issue instead. Without the Anthropic key, matches are listed
