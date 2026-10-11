@@ -1,0 +1,74 @@
+# Which job titles are worth a look, and how they rank. The /job-radar-setup skill writes a first
+# version of this from preferences.md; /job-radar-tune adjusts it from data/rejected.csv and your verdicts.
+#
+# Every list holds words or phrases, matched as whole words, ignoring case:
+#   "product manager"                      the phrase itself
+#   "scien*"                               * stands for any letters: scientist, science, sciences...
+#   {word: manager, not_after: [product]}  "manager", but not "product manager"
+#   {word: chief, not_before: [of staff]}  "chief", but not "chief of staff"
+#   {then: [[director, head], [product]]}  a word from the first list, later one from the second
+#   "/regular expression/"                 an escape hatch (rarely needed)
+# (not_after / not_before words can't use *.)
+#
+# How a title is scored:
+#   1. It must mention the field (title.topic), or be a role that counts on its own (title.also_relevant),
+#      or be a role in investors.roles at an investor or funder. Anything else is ignored, not even logged.
+#   2. The first exclude rule it matches rejects it, unless the title also matches that rule's `unless`.
+#   3. Each listed location is scored; the best counts. No location in reach rejects it.
+#   4. Points = boosts it matches + location points + employer bonus (+ investor bonus). Below min_score rejects it.
+# Rejections are written to data/rejected.csv with the reason, so the rules can be checked.
+
+title:
+  noise: []                     # text to strip from titles first, e.g. "/^partner \d+, /"
+  topic: [ai, ml, machine learning, artificial intelligence, data scien*]
+  also_relevant: [chief of staff]
+
+exclude:
+  - name: hands-on engineering
+    words: [engineer, developer, architect]
+    unless: [director, head, vp, vice president, manager]
+  - name: too junior
+    words: [intern, internship, new grad, junior]
+    at_investors: [intern, internship]   # optional: a different list for jobs at investors and funders
+  - name: too senior
+    words: [vp, vice president, {word: chief, not_before: [of staff]}]
+  - name: wrong function
+    words: [sales, account, marketing, recruit*, legal]
+
+boosts:
+  - points: 4
+    words: [director, head, lead]
+  - points: 3
+    words: [{then: [[senior, sr], [product manager, product lead]]}]
+  - points: 2
+    words: [health*, clinical, bio*]
+
+location:
+  local: [new york, nyc, brooklyn, manhattan]
+  remote: [remote, anywhere]
+  commutable: [new jersey]                # in reach, but further away
+  not_commutable: []                      # places inside a commutable area that are not
+  foreign: [london, uk, india, canada, europe, emea]   # "Remote" here doesn't count
+  points: {local: 3, remote: 2, commutable: 1, unknown: 0}
+
+employers:
+  default_bonus: 2                        # every employer you chose to list is a plus
+  funder_bonus: 2                         # employers marked funder: true in companies.yaml or a pack
+  bonus:                                  # points: [employers] for anyone who differs from the default
+    3: []
+    0: []
+
+investors:
+  employers: []                           # investors and funders besides those marked funder: true
+  roles: [principal, partner, director, venture, portfolio, invest*, program officer]
+  bonus: 4
+
+domain:                                   # what counts as in your field, for portfolio-board companies
+  name: health                            # rejects read "portfolio company outside health"
+  tags: ["*health*", "*medic*", "*clinic*", "*bio*", "*pharma*", "*therap*", "*patient*", "*care"]
+
+searches:
+  large_boards: [artificial intelligence, machine learning, data science]   # Workday, Oracle, Getro
+  portfolio_extra: [AI, product manager]  # added for portfolio boards
+
+min_score: 7

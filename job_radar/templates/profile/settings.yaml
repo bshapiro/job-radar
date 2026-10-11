@@ -1,0 +1,13 @@
+# Engine settings. All optional; these are the defaults.
+
+review:
+  model: claude-sonnet-5-5    # agreed with hand verdicts on 18 of 20 postings at about 1 cent each
+  effort: low
+  limit: 25                   # most postings reviewed in one run (a cost cap)
+
+tracker:
+  close_after_days: 21        # tracker issues are closed after this, but ticks in them still count
+  weekly_on: monday           # the day of the reminder issue listing every match still waiting
+
+discover:
+  weekly_on: monday           # the day job boards are worked out again

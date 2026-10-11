@@ -1,0 +1,57 @@
+# Health tech, AI for biology and drug discovery, longevity research.
+# Boards checked by hand in October 2026; find_boards entries are found by name each week.
+
+description: Health tech, AI for biology and drug discovery, longevity research
+
+find_boards:
+  Roivant Sciences: [roivant]
+  Formation Bio: [formation, theformationbio]
+  Freenome: []
+  Oura: [ouraring, ourahealth]
+  insitro: []
+  Recursion: [recursionpharmaceuticals]
+  Valo Health: [valo]
+  Genesis Molecular AI: [genesistherapeutics, genesis]
+  Biohub: [chanzuckerberginitiative, czbiohub, czi]
+  Nurix Therapeutics: [nurix]
+  Aledade: []
+  Omada Health: [omada]
+  Thesis Care: [thesis]
+  Natera: []
+  Seer: [seerbio]
+  AOA Dx: [aoadx]
+  Myria Biosciences: [myria]
+  Pluto Bio: [pluto, plutobiosciences]
+  Eko Health: [eko]
+  Octo Health: [octo]
+  Ada Health: [ada]
+  Massive Bio: []
+  Flatiron Health: [flatiron]
+  Isomorphic Labs: []
+  Abridge: []
+  OpenEvidence: []
+  Xaira Therapeutics: [xaira]
+  EvolutionaryScale: []
+  Chai Discovery: []
+  Generate Biomedicines: [generatebiomedicines]
+  Arc Institute: []
+  Owkin: []
+  PathAI: []
+  Enveda: [envedabio]
+  Lila Sciences: [lila]
+  Calico: [calicolabs]
+  Zocdoc: []
+
+boards:
+  Tempus AI: {ats: workday, slug: tempus.wd5/tempus/Tempus_Careers}
+  Cityblock Health: {ats: workday, slug: cityblockhealth.wd1/cityblockhealth/CityblockExternalCareerSite}
+  Atria Health and Research Institute: {ats: workable, slug: atria-health}
+  Humana: {ats: workday, slug: humana.wd5/humana/Humana_External_Career_Site}
+  Hippocratic AI: {ats: ashby, slug: Hippocratic%20AI}
+  Verily: {ats: workday, slug: verily.wd1/verily/Verily_Careers}
+  Altos Labs: {ats: greenhouse, slug: altoslabs}
+  Retro Biosciences: {ats: lever, slug: retro}
+  NewLimit: {ats: greenhouse, slug: newlimit}
+
+# name guesses that belong to a different company
+wrong_slugs: [ashby/atria, ashby/generate, ashby/genesis]

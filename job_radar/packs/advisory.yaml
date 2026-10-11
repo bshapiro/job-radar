@@ -1,0 +1,23 @@
+# Consultancies, government science and technology contractors, and AI evaluation, safety and biosecurity groups.
+# Boards checked by hand in October 2026; find_boards entries are found by name each week.
+
+description: Consultancies, government science and technology contractors, and AI evaluation, safety and biosecurity groups
+
+find_boards:
+  McKinsey & Company: [mckinsey]
+
+boards:
+  IQVIA: {ats: workday, slug: iqvia.wd1/iqvia/IQVIA}
+  Guidehouse: {ats: workday, slug: guidehouse.wd1/guidehouse/External}
+  Booz Allen Hamilton: {ats: workday, slug: bah.wd1/bah/BAH_Jobs}
+  Trinity Life Sciences: {ats: workday, slug: trinitylifesciences.wd108/trinitylifesciences/Trinity}
+  Huron: {ats: workday, slug: huron.wd1/huron/huroncareers}
+  RAND: {ats: workday, slug: rand.wd5/rand/External_Career_Site}
+  Chartis: {ats: ashby, slug: chartis}
+  Inizio (Putnam): {ats: greenhouse, slug: inizio}
+  Avalere Health: {ats: lever, slug: avalerehealth}
+  METR: {ats: lever, slug: metr}
+  FAR AI: {ats: ashby, slug: far.ai}
+  Epoch AI: {ats: lever, slug: epoch-ai}
+  Horizon Institute: {ats: ashby, slug: Horizon}
+  Valthos: {ats: ashby, slug: valthos}

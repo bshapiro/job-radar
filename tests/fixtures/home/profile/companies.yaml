@@ -1,0 +1,16 @@
+packs: [science-funders]
+
+find_boards:
+  Example Health: [examplehealth]
+
+boards:
+  Lab Co: {ats: greenhouse, slug: labco}
+  A Fund: {ats: lever, slug: afund, funder: true}
+  Hospital: {ats: oracle, slug: host.fa.us2/CX, location: "New York, NY"}
+
+portfolio_boards:
+  Some Ventures: {ats: getro, host: jobs.someventures.com}
+
+not_in_domain: [Mislabelled Co]
+wrong_slugs: [ashby/example]
+exclude: [Simons Foundation]

@@ -1,0 +1,9 @@
+# New York City hospital systems and cancer centers.
+# Boards checked by hand in October 2026; find_boards entries are found by name each week.
+
+description: New York City hospital systems and cancer centers
+
+boards:
+  Memorial Sloan Kettering: {ats: workday, slug: msk.wd108/msk/MSKCC_Careers_Primary}
+  Mount Sinai Health System: {ats: oracle, location: 'New York, NY', slug: ejis.fa.us6/CX}
+  Northwell Health: {ats: oracle, location: 'New York, NY', slug: eppr.fa.us2/CX_2}

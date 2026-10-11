@@ -1,0 +1,74 @@
+name: Daily job search
+
+on:
+  schedule:
+    - cron: "0 11 * * 1-5"   # weekdays, 11:00 UTC = 7:00 New York (6:00 in winter)
+  workflow_dispatch:        # "Run workflow" button for a manual run
+    inputs:
+      recheck:
+        description: "Quality check: re-review this many hand-reviewed jobs and report agreement (0 = normal run)"
+        default: "0"
+      model:
+        description: "Model for the review step (blank = settings.yaml)"
+        default: ""
+      effort:
+        description: "Effort for the review step (blank = settings.yaml)"
+        default: ""
+      test_email:
+        description: "Only email the current strong matches, to check that email arrives"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write           # commit the updated data/ files
+  issues: write             # the Applied / Not interested tracker issues
+
+concurrency: daily-job-search
+
+env:
+  # The engine version this profile runs. Upgrade by changing the tag (see the engine's CHANGELOG).
+  JOB_RADAR: "job-radar @ git+https://github.com/{engine_repo}@v{version}"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q "$JOB_RADAR"
+
+      - name: Find jobs, review them, and update the tracker
+        if: inputs.test_email != true   # a test run only sends the email; it changes no data
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+          REVIEW_MODEL: ${{ inputs.model }}
+          REVIEW_EFFORT: ${{ inputs.effort }}
+          RECHECK: ${{ inputs.recheck || '0' }}
+          MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          if [ "$RECHECK" != "0" ]; then job-radar recheck "$RECHECK"; fi
+          job-radar daily $([ "$MANUAL" = "true" ] && echo --discover)
+
+      - name: Commit updated data
+        if: inputs.test_email != true
+        run: |
+          git config user.name "job-radar bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "Daily job search $(date -u +%F)"
+          git pull --rebase   # another run or a local push may have landed meanwhile
+          git push
+
+      - name: Email the digest
+        env:
+          GH_TOKEN: ${{ github.token }}          # fallback: a GitHub issue if email isn't set up
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          TEST_EMAIL: ${{ inputs.test_email }}
+        run: |
+          if [ "$TEST_EMAIL" = "true" ]; then job-radar test-email; else job-radar notify; fi

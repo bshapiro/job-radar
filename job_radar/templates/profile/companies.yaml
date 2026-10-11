@@ -1,0 +1,20 @@
+# Which employers and job boards to read. `job-radar packs` lists the packs; include the ones that fit
+# and add your own employers below. Run `job-radar find-board "Name"` to find an employer's board.
+#
+#   find_boards:  employers whose board is found by guessing its short name (extra guesses may be listed)
+#   boards:       boards already known; Workday slugs are host/tenant/site, Oracle slugs host/site
+#                 funder: true marks an investor or funder (see investors in rules.yaml)
+#                 location: "New York, NY" is added to vague locations like "United States"
+#   portfolio_boards: a venture firm's board of jobs at its portfolio companies (getro or consider)
+#   harvest_portfolio: true also reads the own boards of in-domain companies found on those
+#   not_in_domain: portfolio companies not to add as boards of their own
+#   wrong_slugs:  name guesses that belong to a different company, as ats/slug
+#   exclude:      employers a pack brings in that you don't want
+
+packs: []
+
+find_boards: {}
+
+boards: {}
+
+exclude: []

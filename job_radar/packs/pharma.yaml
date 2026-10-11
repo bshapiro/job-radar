@@ -1,0 +1,22 @@
+# Large pharmaceutical and medical technology companies (mostly Workday boards).
+# Boards checked by hand in October 2026; find_boards entries are found by name each week.
+
+description: Large pharmaceutical and medical technology companies (mostly Workday boards)
+
+find_boards:
+  Boehringer Ingelheim: []
+  Bayer: []
+  BioNTech: []
+  GSK: []
+  Danaher: []
+
+boards:
+  Pfizer: {ats: workday, slug: pfizer.wd1/pfizer/PfizerCareers}
+  Novartis: {ats: workday, slug: novartis.wd3/novartis/Novartis_Careers}
+  Merck: {ats: workday, slug: msd.wd5/msd/SearchJobs}
+  Gilead Sciences: {ats: workday, slug: gilead.wd1/gilead/gileadcareers}
+  AstraZeneca: {ats: workday, slug: astrazeneca.wd3/astrazeneca/Careers}
+  Johnson & Johnson: {ats: workday, slug: jj.wd5/jj/JJ}
+  Regeneron: {ats: workday, slug: regeneron.wd1/regeneron/Careers}
+  Bristol Myers Squibb: {ats: workday, slug: bristolmyerssquibb.wd5/bristolmyerssquibb/BMS}
+  Medtronic: {ats: workday, slug: medtronic.wd1/medtronic/MedtronicCareers}

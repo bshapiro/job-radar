@@ -1,0 +1,7 @@
+__pycache__/
+.DS_Store
+.venv/
+digest.md
+digest.html
+digest_subject.txt
+.cache/

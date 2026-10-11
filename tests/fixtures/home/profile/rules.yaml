@@ -1,0 +1,58 @@
+title:
+  noise: ["/^partner \\d+, /"]
+  topic: [ai, machine learning, data scien*]
+  also_relevant: &advisory [chief of staff, program officer]
+
+exclude:
+  - name: hands-on engineering
+    words: [engineer, developer]
+    unless: [director, head, manager]
+  - name: too senior
+    words: [senior director, vp, {word: chief, not_before: [of staff]}]
+    unless: ["/\\bdirector ?(/|or) ?senior director/"]
+  - name: too junior
+    words: [intern, analyst, {word: associate, not_before: [director]}]
+    at_investors: [intern]
+  - name: wrong function
+    words: [sales, recruit*]
+
+boosts:
+  - points: 4
+    words: *advisory
+  - points: 4
+    words: [director, head, {word: manager, not_after: [product, program]}]
+  - points: 4
+    words: [{then: [[director, head, lead], [product]]}]
+  - points: 1
+    words: [product manager]
+  - points: 2
+    words: [health*, bio*]
+
+location:
+  local: [new york, nyc, ny]
+  remote: [remote]
+  commutable: [new jersey, nj]
+  not_commutable: [titusville]
+  foreign: [india, london, europe*]
+
+employers:
+  default_bonus: 2
+  funder_bonus: 3
+  bonus:
+    0: [Quant Co]
+    1: [Lab Co]
+
+investors:
+  employers: [Builder Co]
+  roles: [principal, partner, associate, program officer]
+  bonus: 4
+
+domain:
+  name: health
+  tags: ["*health*", "*bio*", "*care"]
+
+searches:
+  large_boards: [machine learning]
+  portfolio_extra: [AI]
+
+min_score: 7

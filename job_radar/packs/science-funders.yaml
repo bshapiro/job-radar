@@ -1,0 +1,20 @@
+# Science foundations and public research funders (marked as funders).
+# Boards checked by hand in October 2026; find_boards entries are found by name each week.
+
+description: Science foundations and public research funders (marked as funders)
+
+boards:
+  Schmidt Sciences: {ats: lever, funder: true, slug: schmidt-entities}
+  ARPA-H: {ats: arpah, funder: true, slug: ''}
+  Chan Zuckerberg Initiative: {ats: greenhouse, funder: true, slug: chanzuckerberginitiative}
+  Astera Institute: {ats: ashby, funder: true, slug: astera}
+  Coefficient Giving: {ats: ashby, funder: true, slug: coefficientgiving}
+  Convergent Research: {ats: lever, funder: true, slug: convergentresearch}
+  Gordon and Betty Moore Foundation: {ats: greenhouse, funder: true, slug: gordonandbettymoorefoundation}
+  Patrick J. McGovern Foundation: {ats: lever, funder: true, slug: mcgovern}
+  Michael J. Fox Foundation: {ats: greenhouse, funder: true, slug: themichaeljfoxfoundation}
+  Gates Foundation: {ats: workday, funder: true, slug: gatesfoundation.wd1/gatesfoundation/Gates}
+  Howard Hughes Medical Institute: {ats: workday, funder: true, slug: hhmi.wd1/hhmi/External}
+  Simons Foundation: {ats: workday, funder: true, slug: simonsfoundation.wd1/simonsfoundation/simonsfoundationcareers}
+  Robert Wood Johnson Foundation: {ats: workday, funder: true, slug: rwjf.wd1/rwjf/RWJF}
+  Breakthrough T1D: {ats: workday, funder: true, slug: breakthrought1d.wd115/breakthrought1d/BreakthroughT1D}

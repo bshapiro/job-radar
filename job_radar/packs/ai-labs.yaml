@@ -1,0 +1,9 @@
+# Frontier AI labs.
+# Boards checked by hand in October 2026; find_boards entries are found by name each week.
+
+description: Frontier AI labs
+
+find_boards:
+  Google DeepMind: [deepmind]
+  Anthropic: []
+  OpenAI: []

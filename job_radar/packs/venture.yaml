@@ -1,0 +1,48 @@
+# Venture firms, venture studios and life-science investors (marked as funders), plus their portfolio-company job boards.
+# Boards checked by hand in October 2026; find_boards entries are found by name each week.
+
+description: Venture firms, venture studios and life-science investors (marked as funders), plus their portfolio-company job boards
+
+boards:
+  Andreessen Horowitz: {ats: greenhouse, funder: true, slug: a16z}
+  General Catalyst: {ats: greenhouse, funder: true, slug: generalcatalyst}
+  Flagship Pioneering: {ats: greenhouse, funder: true, slug: flagshippioneeringinc}
+  Bessemer Venture Partners: {ats: greenhouse, funder: true, slug: bessemerventurepartners}
+  Sequoia Capital: {ats: ashby, funder: true, slug: sequoia}
+  Khosla Ventures: {ats: ashby, funder: true, slug: khoslaventures}
+  8VC: {ats: ashby, funder: true, slug: 8vc}
+  Insight Partners: {ats: ashby, funder: true, slug: insight-partners}
+  Casdin Capital: {ats: ashby, funder: true, slug: casdin-capital}
+  5AM Ventures: {ats: lever, funder: true, slug: 5amventures}
+  Y Combinator: {ats: ashby, funder: true, slug: ycombinator}
+  Engine Ventures: {ats: lever, funder: true, slug: engine-ventures}
+  Aegis Ventures: {ats: greenhouse, funder: true, slug: aegisventures}
+  Redesign Health: {ats: ashby, funder: true, slug: Redesign%20Health}
+  Foresite Labs: {ats: greenhouse, funder: true, slug: foresitelabs}
+  Deerfield Management: {ats: greenhouse, funder: true, slug: deerfield28}
+  RA Capital Management: {ats: greenhouse, funder: true, slug: racapitalmanagementllc}
+
+portfolio_boards:
+  AlleyCorp: {ats: getro, host: jobs.alleycorp.com}
+  Define Ventures: {ats: getro, host: careers.definevc.com}
+  Oak HC/FT: {ats: getro, host: jobs.oakhcft.com}
+  F-Prime: {ats: getro, host: jobs.fprimecapital.com}
+  Flare Capital: {ats: getro, host: careers.flarecapital.com}
+  Transformation Capital: {ats: getro, host: careers.transformcap.com}
+  Venrock: {ats: getro, host: jobs.venrock.com}
+  Lux Capital: {ats: getro, host: jobs.luxcapital.com}
+  Thrive Capital: {ats: getro, host: jobs.thrivecap.com}
+  General Catalyst: {ats: getro, host: jobs.generalcatalyst.com}
+  Khosla Ventures: {ats: getro, host: jobs.khoslaventures.com}
+  Third Rock Ventures: {ats: consider, host: jobs.thirdrockventures.com}
+  GV: {ats: consider, host: jobs.gv.com}
+  5AM Ventures: {ats: consider, host: jobs.5amventures.com}
+  Foresite Capital: {ats: consider, host: careers.foresitecapital.com}
+  Dimension: {ats: consider, host: talent.dimensioncap.com}
+  Atlas Venture: {ats: consider, host: careers.atlasventure.com}
+
+# also read the own boards of in-domain companies on these portfolio boards
+harvest_portfolio: true
+
+# mis-tagged as health by the portfolio boards
+not_in_domain: [Gusto, KAYAK, Spotify]
