@@ -116,7 +116,7 @@ def test_skills_have_matching_names():
 def test_skills_and_readme_only_use_real_commands():
     help_text = subprocess.run([sys.executable, "-m", "job_radar", "--help"], capture_output=True, text=True).stdout
     real = set(re.findall(r"^    ([a-z][a-z-]+)(?:  |$)", help_text, re.M))
-    docs = [*(PACKAGE / "skills").glob("*/SKILL.md"), ROOT / "README.md"]
+    docs = [*(PACKAGE / "skills").glob("*/SKILL.md"), ROOT / "README.md", *(ROOT / "docs").glob("*.md")]
     used = set(re.findall(r"`job-radar ([a-z][a-z-]*)", "".join(p.read_text() for p in docs)))
     assert used and used <= real, used - real
 
@@ -183,3 +183,16 @@ def test_privacy_check_reads_history(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(pc, "ROOT", repo)
     assert pc.main([str(tmp_path / "t.txt")]) == 1
     assert "git history" in capsys.readouterr().out
+
+
+def test_docs_links_point_at_real_files():
+    for doc in [ROOT / "README.md", *(ROOT / "docs").glob("*.md")]:
+        for link in re.findall(r"\]\(([^)#]+?)\)", doc.read_text()):
+            if not link.startswith("http"):
+                assert (doc.parent / link).exists(), f"{doc.name}: {link}"
+
+
+def test_docs_install_the_current_version():
+    for doc in [ROOT / "README.md", *(ROOT / "docs").glob("*.md")]:
+        for v in re.findall(r"job-radar@v([\d.]+)", doc.read_text()):
+            assert v == __version__, f"{doc.name} installs v{v}"

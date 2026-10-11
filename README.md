@@ -43,6 +43,9 @@ data/                written by the engine, committed by the daily run
 
 ## Getting started
 
+New here? **[The getting-started guide](docs/getting-started.md)** explains what you get, what you
+need, and how setup works, without the technical detail.
+
 You need Python 3.10+, a GitHub account with the [GitHub CLI](https://cli.github.com/), an Anthropic
 API key for the reviews, and a Gmail account (or any SMTP account) to send the email.
 
