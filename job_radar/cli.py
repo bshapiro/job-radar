@@ -56,6 +56,8 @@ def main(argv=None) -> int:
 
     a = p.parse_args(argv)
     home = Home(a.home)
+    if a.command not in ("init", "packs", "find-board", "doctor") and home.profile.exists():
+        home.data.mkdir(exist_ok=True)   # git doesn't keep an empty folder, so a fresh checkout may lack it
 
     if a.command == "discover":
         from . import discover

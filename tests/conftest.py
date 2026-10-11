@@ -72,6 +72,7 @@ def web(monkeypatch):
 @pytest.fixture
 def home(tmp_path):
     shutil.copytree(FIXTURE, tmp_path / "home")
+    (tmp_path / "home" / "data").mkdir(exist_ok=True)   # git doesn't keep the fixture's empty data/ folder
     return Home(tmp_path / "home")
 
 

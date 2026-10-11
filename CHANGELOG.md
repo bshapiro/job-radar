@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1
+
+- Create `data/` when it's missing. Git doesn't keep an empty folder, so a freshly cloned profile repo
+  (including the daily workflow's checkout) had none, and the first run failed.
+
 ## 1.0.0
 
 First release.

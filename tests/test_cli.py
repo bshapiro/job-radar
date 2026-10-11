@@ -124,3 +124,12 @@ def test_init_and_doctor_exit_codes(tmp_path, monkeypatch):
     assert run("--home", tmp_path / "p", "doctor") == 1        # preferences are still the template
     (tmp_path / "p" / "profile" / "preferences.md").write_text("# Mine\nAI product roles.\n")
     assert run("--home", tmp_path / "p", "doctor") == 0
+
+
+def test_commands_work_in_a_fresh_checkout_without_data(tmp_path, monkeypatch):
+    setup.init(tmp_path / "p")
+    (tmp_path / "p" / "data").rmdir()                    # as after a clone: git drops the empty folder
+    from job_radar import digest
+    monkeypatch.setattr(digest, "run", lambda h, test=False: None)
+    run("--home", tmp_path / "p", "digest")
+    assert (tmp_path / "p" / "data").is_dir()
